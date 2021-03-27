@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
-// cmponents
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-
-// modules
-import { HomeModule } from './home/home.module';
-import { LandingPageModule } from './landing-page/landing-page.module';
-
-// common modules
-import { DialogModule } from './common/dialog/dialog.module';
+// components
+import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
+import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component';
 
 // angular animation modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,17 +19,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
+    SignUpDialogComponent,
+    SignInDialogComponent,
+  ],
+  exports: [
+    SignUpDialogComponent,
+    SignInDialogComponent,
   ],
   imports: [
     // angular modules
-    BrowserModule,
-    // common modules
-    DialogModule,
-    // other modules
-    HomeModule,
-    LandingPageModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
     // angular animation modules
     BrowserAnimationsModule,
     // angular material modules
@@ -43,10 +39,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatInputModule,
     MatIconModule,
-  ],
-  providers: [
-
-  ],
-  bootstrap: [ AppComponent ]
+  ]
 })
-export class AppModule { }
+export class DialogModule { }

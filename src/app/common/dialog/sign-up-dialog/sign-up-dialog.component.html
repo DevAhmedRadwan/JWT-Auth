@@ -1,0 +1,82 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- title -->
+  <h5 mat-dialog-title>Sign up</h5>
+  <div mat-dialog-content>
+    <!-- username -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input formControlName="username" #username matInput type="text">
+      <button 
+        matSuffix 
+        mat-button 
+        mat-icon-button 
+        aria-label="Clear"
+        *ngIf="username.value"  
+        (click)="username.value=''">
+          <mat-icon>close</mat-icon>
+      </button>
+      <!-- errors -->
+      <mat-error *ngIf="form.get('username').invalid">
+        <div *ngIf="form.get('username').errors.required">
+          Please enter username !
+        </div>
+      </mat-error>
+      <!-- end of errors -->
+    </mat-form-field>
+    <!-- end of username -->
+    <!-- email -->
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input formControlName="email" #email matInput type="email">
+      <button 
+        matSuffix 
+        mat-button 
+        mat-icon-button 
+        aria-label="Clear"
+        *ngIf="email.value"  
+        (click)="email.value=''">
+          <mat-icon>close</mat-icon>
+      </button>
+      <!-- errors -->
+      <mat-error *ngIf="form.get('email').invalid">
+        <div *ngIf="form.get('email').errors.required">
+          Please enter email !
+        </div>
+      </mat-error>
+      <!-- end of errors -->
+    </mat-form-field>
+    <!-- end of email -->
+    <!-- password -->
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input formControlName="password" #password matInput type="password">
+      <button
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        *ngIf="password.value"
+        (click)="password.value=''">
+          <mat-icon>close</mat-icon>
+      </button>
+      <!-- errors -->
+      <mat-error *ngIf="form.get('password').invalid">
+        <div *ngIf="form.get('password').errors.required">
+          Please enter password !
+        </div>
+      </mat-error>
+      <!-- end of errors -->
+    </mat-form-field>
+    <!-- end of password -->
+  </div>
+  <!-- sign in button -->
+  <div mat-dialog-actions>
+    <button
+      [disabled]="form.invalid"
+      mat-raised-button
+      color="primary"
+      type="submit">
+        Sign up
+    </button>
+  </div>
+</form>
