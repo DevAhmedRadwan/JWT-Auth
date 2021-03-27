@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 
 // handle errors
 const handleErrors = (err) => {
+  // errors
   let errors = { email: '', username: '', password: '' };
 
   // incorrect email
@@ -36,17 +37,10 @@ const handleErrors = (err) => {
   return errors;
 }
 
-//the secret key must be moved from here
-const secretKey = 'net ninja secret';
-
-// age of tokens and cookies
-//       d   h    m    s
-maxAge = 3 * 24 * 60 * 60;
-
 //create a token using jwt
 function createToken(id) {
-  return jwt.sign({ id }, secretKey, {
-    expiresIn: maxAge
+  return jwt.sign({ id }, process.env.SECRET_KEY, {
+    expiresIn: process.env.MAX_AGE
   });
 };
 
@@ -55,7 +49,7 @@ module.exports.signup = async (req,res,next)=>{
   try{
     const user = await User.create({email, username, password});
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie('jwt', token, { httpOnly: true, maxAge: process.env.MAX_AGE * 1000 });
     res.status(201).json({ user: user._id });
   }
   catch (err){
@@ -70,7 +64,7 @@ module.exports.login = async (req,res,next)=>{
   try {
     const user = await User.login(email, username, password);
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie('jwt', token, { httpOnly: true, maxAge: process.env.MAX_AGE * 1000 });
     res.status(200).json({ user: user._id });
   } 
   catch (err) {
